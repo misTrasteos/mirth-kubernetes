@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mirth-deployment
+  labels:
+    app: mirth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mirth
+  template:
+    metadata:
+      labels:
+        app: mirth
+    spec:
+      containers:
+      - name: mirth
+        image: docker.io/nextgenhealthcare/connect:latest
+        ports:
+        - name: admin-https
+          containerPort: 8443
+        resources:
+          limits:
+            memory: 512M
+            cpu: 1000m
